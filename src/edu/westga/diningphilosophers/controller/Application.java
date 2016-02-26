@@ -1,26 +1,23 @@
-/**
- * 
- */
 package edu.westga.diningphilosophers.controller;
 
 /**
- * @author danielburkhart
- *
+ * Application class that contains main method.
+ * 
+ * @author Daniel Burkhart
+ * @version Spring 2016
  */
 public class Application {
 
 	/**
+	 * Main method that serves as the entry point of the program
 	 * 
-	 */
-	public Application() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
 	 * @param args
+	 *            The arguments of the method
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		DiningPhilosophersController controller = new DiningPhilosophersController();
+		controller.startDinnerParty();
 
 	}
 
