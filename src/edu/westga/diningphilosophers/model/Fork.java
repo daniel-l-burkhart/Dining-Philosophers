@@ -47,16 +47,16 @@ public class Fork {
 	private void makeThreadWait() {
 		try {
 			this.wait();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException exception) {
+			exception.printStackTrace();
 		}
 	}
 
 	private void sleepForFiftyMillis() {
 		try {
 			Thread.sleep(50);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException exception) {
+			exception.printStackTrace();
 		}
 	}
 

@@ -13,6 +13,8 @@ public class Philosopher implements Runnable {
 	private String name;
 
 	/**
+	 * Returns the name of the philosopher.
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -24,6 +26,15 @@ public class Philosopher implements Runnable {
 
 	/**
 	 * Philosopher constructor that initializes everything.
+	 * 
+	 * @param name
+	 *            The name of the philosopher
+	 * @param first
+	 *            The first fork
+	 * @param second
+	 *            The second fork
+	 * @param butler
+	 *            The butler to manage the dinner party
 	 */
 	public Philosopher(String name, Fork first, Fork second, Butler butler) {
 
@@ -66,62 +77,57 @@ public class Philosopher implements Runnable {
 	}
 
 	private void arriveAtTable() {
-		
+
 		this.butler.sitDown();
 		System.out.println(this.name + " sits down");
 	}
-	
 
 	private void leaveTable() {
-		
+
 		this.butler.arise();
 		System.out.println(this.name + " rises");
 	}
 
-	
 	private void pickUpForks() {
-		
+
 		this.firstFork.lift();
 		System.out.println(this.name + " picks up first fork.");
 
 		this.secondFork.lift();
 		System.out.println(this.name + " picks up second fork.");
-		
+
 	}
-	
 
 	private void eat() {
-		
+
 		try {
 			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException exception) {
+			exception.printStackTrace();
 		}
-		
+
 		System.out.println(this.name + " finished eating.");
 	}
-	
 
 	private void putDownForks() {
-		
+
 		this.secondFork.putDown();
 		System.out.println(this.name + " puts down second fork");
 
 		this.firstFork.putDown();
 		System.out.println(this.name + " puts down first fork");
-		
+
 	}
-	
 
 	private void think() {
-		
+
 		try {
 			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException exception) {
+			exception.printStackTrace();
 		}
 		System.out.println(this.name + " has finished thinking");
-		
+
 	}
 
 	/**

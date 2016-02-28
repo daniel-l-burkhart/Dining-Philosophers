@@ -7,7 +7,7 @@ package edu.westga.diningphilosophers.model;
  * Butler class that acts as a semaphore of the dining philosophers problem
  * 
  * @author danielburkhart
- *
+ * @version Spring 2016
  */
 public class Butler {
 
@@ -36,8 +36,8 @@ public class Butler {
 		if (this.seats == 4) {
 			try {
 				this.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			} catch (InterruptedException exception) {
+				exception.printStackTrace();
 			}
 		}
 		this.seats += 1;
