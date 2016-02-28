@@ -45,26 +45,48 @@ public class DiningPhilosophersController {
 	 */
 	public DiningPhilosophersController() {
 
+		this.makeForks();
 		this.initializeVariables();
+		this.makePhilosophers();
+		this.makeThreads();
 		this.makeCollections();
 
 	}
+	
+	private void makeForks() {
+		
+		this.forks = new ArrayList<Fork>(5);
+		
+		for (int i = 0; i < LIST_SIZE; i++) {
+			this.forks.add(new Fork());
+		}
+	}
+	
+	private void initializeVariables() {
 
-	/**
-	 * Starts the dinner party of the philosophers
-	 */
-	public void startDinnerParty() {
+		this.philosophers = new ArrayList<Philosopher>(LIST_SIZE);
+		this.threads = new ArrayList<Thread>(5);
+		this.jarvis = new Butler();
 
-		System.out.println("Begin");
+	}
 
-		this.startThreads();
+	private void makeThreads() {
+		
+		this.socratesThread = new Thread(this.socrates);
+		this.aristotleThread = new Thread(this.aristotle);
+		this.platoThread = new Thread(this.plato);
+		this.descartesThread = new Thread(this.descartes);
+		this.nietzscheThread = new Thread(this.nietzsche);		
+	}
 
-		this.sleepForTenSeconds();
-
-		this.stopThreads();
-
-		System.out.println("End");
-
+	private void makePhilosophers() {
+		
+		this.socrates = new Philosopher("Socrates", this.forks.get(0), this.forks.get((0 + 1) % 5), this.jarvis);
+		this.aristotle = new Philosopher("Aristotle", this.forks.get(1), this.forks.get((1 + 1) % 5), this.jarvis);
+		this.plato = new Philosopher("Plato", this.forks.get(2), this.forks.get((2 + 1) % 5), this.jarvis);
+		this.descartes = new Philosopher("Descartes", this.forks.get(3), this.forks.get((3 + 1) % 5), this.jarvis);
+		this.nietzsche = new Philosopher("Nietzsche", this.forks.get(4), this.forks.get((4 + 1) % 5), this.jarvis);	
+		
 	}
 
 	private void makeCollections() {
@@ -82,38 +104,27 @@ public class DiningPhilosophersController {
 		this.threads.add(this.platoThread);
 
 	}
+	
+	/**
+	 * Starts the dinner party of the philosophers
+	 */
+	public void startDinnerParty() {
 
-	private void initializeVariables() {
+		System.out.println("Begin");
 
-		this.forks = new ArrayList<Fork>(5);
-		this.makeForks();
+		this.startThreads();
 
-		this.philosophers = new ArrayList<Philosopher>(LIST_SIZE);
-		this.threads = new ArrayList<Thread>(5);
-		this.jarvis = new Butler();
-		this.socrates = new Philosopher("Socrates", this.forks.get(0), this.forks.get(1), this.jarvis);
-		this.aristotle = new Philosopher("Aristotle", this.forks.get(1), this.forks.get(2), this.jarvis);
-		this.plato = new Philosopher("Plato", this.forks.get(2), this.forks.get(3), this.jarvis);
-		this.descartes = new Philosopher("Descartes", this.forks.get(3), this.forks.get(4), this.jarvis);
-		this.nietzsche = new Philosopher("Nietzsche", this.forks.get(4), this.forks.get(0), this.jarvis);
+		this.sleepForTenSeconds();
 
-		this.socratesThread = new Thread(this.socrates);
-		this.aristotleThread = new Thread(this.aristotle);
-		this.platoThread = new Thread(this.plato);
-		this.descartesThread = new Thread(this.descartes);
-		this.nietzscheThread = new Thread(this.nietzsche);
+		this.stopThreads();
+
+		System.out.println("End");
 
 	}
-
-	private void makeForks() {
-		for (int i = 0; i < LIST_SIZE; i++) {
-			this.forks.add(new Fork());
-		}
-	}
-
-	private void stopThreads() {
-		for (Philosopher currPhil : this.philosophers) {
-			currPhil.stop();
+	
+	private void startThreads() {
+		for (Philosopher philosopher : this.philosophers) {
+			(new Thread(philosopher)).start();
 		}
 	}
 
@@ -124,10 +135,10 @@ public class DiningPhilosophersController {
 			exception.printStackTrace();
 		}
 	}
-
-	private void startThreads() {
-		for (Philosopher philosopher : this.philosophers) {
-			(new Thread(philosopher)).start();
+	
+	private void stopThreads() {
+		for (Philosopher currPhil : this.philosophers) {
+			currPhil.stop();
 		}
 	}
 
