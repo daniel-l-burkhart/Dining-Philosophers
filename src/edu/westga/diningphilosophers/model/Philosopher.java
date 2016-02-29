@@ -11,16 +11,6 @@ public class Philosopher implements Runnable {
 	private Fork firstFork;
 	private Fork secondFork;
 	private String name;
-
-	/**
-	 * Returns the name of the philosopher.
-	 * 
-	 * @return the name
-	 */
-	public String getName() {
-		return this.name;
-	}
-
 	private boolean keepWorking;
 	private Butler butler;
 
@@ -51,8 +41,9 @@ public class Philosopher implements Runnable {
 		this.firstFork = first;
 		this.secondFork = second;
 		this.name = name;
-		this.keepWorking = true;
 		this.butler = butler;
+		
+		this.keepWorking = true;
 
 	}
 

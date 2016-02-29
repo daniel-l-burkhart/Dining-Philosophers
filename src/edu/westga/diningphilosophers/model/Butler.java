@@ -3,13 +3,17 @@
  */
 package edu.westga.diningphilosophers.model;
 
+import edu.westga.diningphilosophers.controller.DiningPhilosophersController;
+
 /**
  * Butler class that acts as a semaphore of the dining philosophers problem
  * 
- * @author danielburkhart
+ * @author Daniel Burkhart
  * @version Spring 2016
  */
 public class Butler {
+
+	public static final int MAX_GUESTS_ALLOWED_AT_TABLE = DiningPhilosophersController.LIST_SIZE - 1;
 
 	private int seats;
 
@@ -24,8 +28,10 @@ public class Butler {
 	 * Called when one of the philosophers leaves the table.
 	 */
 	public synchronized void arise() {
+		
 		this.seats -= 1;
 		this.notifyAll();
+		
 	}
 
 	/**
@@ -33,15 +39,15 @@ public class Butler {
 	 */
 	public synchronized void sitDown() {
 
-		if (this.seats == 4) {
+		if (this.seats == MAX_GUESTS_ALLOWED_AT_TABLE) {
 			try {
 				this.wait();
 			} catch (InterruptedException exception) {
 				exception.printStackTrace();
 			}
 		}
+		
 		this.seats += 1;
-
 	}
 
 }

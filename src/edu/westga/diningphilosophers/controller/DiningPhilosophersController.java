@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.westga.diningphilosophers.controller;
 
 import java.util.ArrayList;
@@ -44,52 +41,47 @@ public class DiningPhilosophersController {
 	 * Initializes and adds all variables to their collections.
 	 */
 	public DiningPhilosophersController() {
+		
+		this.philosophers = new ArrayList<Philosopher>(LIST_SIZE);
+		this.threads = new ArrayList<Thread>(LIST_SIZE);
+		this.forks = new ArrayList<Fork>(LIST_SIZE);
+		this.jarvis = new Butler();
 
-		this.makeForks();
-		this.initializeVariables();
-		this.makePhilosophers();
+		this.buildForks();	
+		this.createPhilosophers();
 		this.makeThreads();
-		this.makeCollections();
+		this.populateCollections();
 
 	}
-	
-	private void makeForks() {
-		
-		this.forks = new ArrayList<Fork>(5);
-		
+
+	private void buildForks() {
+
 		for (int i = 0; i < LIST_SIZE; i++) {
 			this.forks.add(new Fork());
 		}
 	}
 	
-	private void initializeVariables() {
-
-		this.philosophers = new ArrayList<Philosopher>(LIST_SIZE);
-		this.threads = new ArrayList<Thread>(5);
-		this.jarvis = new Butler();
-
-	}
-
 	private void makeThreads() {
-		
+
 		this.socratesThread = new Thread(this.socrates);
 		this.aristotleThread = new Thread(this.aristotle);
 		this.platoThread = new Thread(this.plato);
 		this.descartesThread = new Thread(this.descartes);
-		this.nietzscheThread = new Thread(this.nietzsche);		
+		this.nietzscheThread = new Thread(this.nietzsche);
+		
 	}
 
-	private void makePhilosophers() {
-		
+	private void createPhilosophers() {
+
 		this.socrates = new Philosopher("Socrates", this.forks.get(0), this.forks.get((0 + 1) % 5), this.jarvis);
 		this.aristotle = new Philosopher("Aristotle", this.forks.get(1), this.forks.get((1 + 1) % 5), this.jarvis);
 		this.plato = new Philosopher("Plato", this.forks.get(2), this.forks.get((2 + 1) % 5), this.jarvis);
 		this.descartes = new Philosopher("Descartes", this.forks.get(3), this.forks.get((3 + 1) % 5), this.jarvis);
-		this.nietzsche = new Philosopher("Nietzsche", this.forks.get(4), this.forks.get((4 + 1) % 5), this.jarvis);	
-		
+		this.nietzsche = new Philosopher("Nietzsche", this.forks.get(4), this.forks.get((4 + 1) % 5), this.jarvis);
+
 	}
 
-	private void makeCollections() {
+	private void populateCollections() {
 
 		this.philosophers.add(this.aristotle);
 		this.philosophers.add(this.descartes);
@@ -104,7 +96,7 @@ public class DiningPhilosophersController {
 		this.threads.add(this.platoThread);
 
 	}
-	
+
 	/**
 	 * Starts the dinner party of the philosophers
 	 */
@@ -113,18 +105,16 @@ public class DiningPhilosophersController {
 		System.out.println("Begin");
 
 		this.startThreads();
-
 		this.sleepForTenSeconds();
-
 		this.stopThreads();
 
 		System.out.println("End");
 
 	}
-	
+
 	private void startThreads() {
-		for (Philosopher philosopher : this.philosophers) {
-			(new Thread(philosopher)).start();
+		for (Thread currentThread : this.threads) {
+			currentThread.start();
 		}
 	}
 
@@ -135,7 +125,7 @@ public class DiningPhilosophersController {
 			exception.printStackTrace();
 		}
 	}
-	
+
 	private void stopThreads() {
 		for (Philosopher currPhil : this.philosophers) {
 			currPhil.stop();
