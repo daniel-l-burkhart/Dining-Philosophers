@@ -39,7 +39,7 @@ public class Butler {
 	 */
 	public synchronized void sitDown() {
 
-		if (this.seats == MAX_GUESTS_ALLOWED_AT_TABLE) {
+		while (this.seats == MAX_GUESTS_ALLOWED_AT_TABLE) {
 			try {
 				this.wait();
 			} catch (InterruptedException exception) {
