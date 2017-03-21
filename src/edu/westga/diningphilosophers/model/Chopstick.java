@@ -7,20 +7,19 @@ package edu.westga.diningphilosophers.model;
  * @version Spring 2016
  * 
  */
-public class Fork {
+public class Chopstick {
 
 	private boolean availalbe;
 
 	/**
 	 * Fork class that initializes the availalbity to true by default
 	 */
-	public Fork() {
-
+	public Chopstick() {
 		this.availalbe = true;
 	}
 
 	/**
-	 * Returns true if fork is available, false otherwise
+	 * Method that gets availability of fork
 	 * 
 	 * @return true if fork is available, false otherwise
 	 */

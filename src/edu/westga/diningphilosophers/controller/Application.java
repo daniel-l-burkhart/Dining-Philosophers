@@ -12,13 +12,11 @@ public class Application {
 	 * Main method that serves as the entry point of the program
 	 * 
 	 * @param args
-	 *            The arguments of the method
+	 *            The arguments from command line
 	 */
 	public static void main(String[] args) {
-
 		DiningPhilosophersController controller = new DiningPhilosophersController();
 		controller.startDinnerParty();
-
 	}
 
 }

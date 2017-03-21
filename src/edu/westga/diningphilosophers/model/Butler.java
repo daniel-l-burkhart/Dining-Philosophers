@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.westga.diningphilosophers.model;
 
 import edu.westga.diningphilosophers.controller.DiningPhilosophersController;
@@ -28,10 +25,9 @@ public class Butler {
 	 * Called when one of the philosophers leaves the table.
 	 */
 	public synchronized void arise() {
-		
+
 		this.seats -= 1;
 		this.notifyAll();
-		
 	}
 
 	/**
@@ -46,7 +42,7 @@ public class Butler {
 				exception.printStackTrace();
 			}
 		}
-		
+
 		this.seats += 1;
 	}
 

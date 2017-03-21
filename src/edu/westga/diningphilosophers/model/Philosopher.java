@@ -8,11 +8,15 @@ package edu.westga.diningphilosophers.model;
  */
 public class Philosopher implements Runnable {
 
-	private Fork firstFork;
-	private Fork secondFork;
+	private Chopstick firstChopstick;
+	private Chopstick secondChopstick;
 	private String name;
 	private boolean keepWorking;
 	private Butler butler;
+
+	private Philosopher() {
+		this.keepWorking = true;
+	}
 
 	/**
 	 * Philosopher constructor that initializes everything.
@@ -20,13 +24,15 @@ public class Philosopher implements Runnable {
 	 * @param name
 	 *            The name of the philosopher
 	 * @param first
-	 *            The first fork
+	 *            The first chopstick
 	 * @param second
-	 *            The second fork
+	 *            The second chopstick
 	 * @param butler
 	 *            The butler to manage the dinner party
 	 */
-	public Philosopher(String name, Fork first, Fork second, Butler butler) {
+	public Philosopher(String name, Chopstick first, Chopstick second, Butler butler) {
+
+		this();
 
 		if (first == null) {
 			throw new IllegalArgumentException("First fork is null");
@@ -38,13 +44,10 @@ public class Philosopher implements Runnable {
 			throw new IllegalArgumentException("Butler is null");
 		}
 
-		this.firstFork = first;
-		this.secondFork = second;
+		this.firstChopstick = first;
+		this.secondChopstick = second;
 		this.name = name;
 		this.butler = butler;
-		
-		this.keepWorking = true;
-
 	}
 
 	/**
@@ -62,7 +65,6 @@ public class Philosopher implements Runnable {
 			this.putDownForks();
 			this.leaveTable();
 			this.think();
-
 		}
 
 	}
@@ -81,11 +83,11 @@ public class Philosopher implements Runnable {
 
 	private void pickUpForks() {
 
-		this.firstFork.lift();
-		System.out.println(this.name + " picks up first fork.");
+		this.firstChopstick.lift();
+		System.out.println(this.name + " picks up first chopstick.");
 
-		this.secondFork.lift();
-		System.out.println(this.name + " picks up second fork.");
+		this.secondChopstick.lift();
+		System.out.println(this.name + " picks up second chopstick.");
 
 	}
 
@@ -102,11 +104,11 @@ public class Philosopher implements Runnable {
 
 	private void putDownForks() {
 
-		this.secondFork.putDown();
-		System.out.println(this.name + " puts down second fork");
+		this.secondChopstick.putDown();
+		System.out.println(this.name + " puts down second chopstick");
 
-		this.firstFork.putDown();
-		System.out.println(this.name + " puts down first fork");
+		this.firstChopstick.putDown();
+		System.out.println(this.name + " puts down first chopstick");
 
 	}
 
